@@ -15,16 +15,17 @@ export default class Transaction extends Component{
     }
     getCamPerm=async()=>{
        
-        const status= await Permissions.askAsync(Permissions.CAMERA)
+        const {status}= await Permissions.askAsync(Permissions.CAMERA)
  
         this.setState({
-            hasCamPerm:status==='granted',
-           
-            scanned:false,
+            hasCamPerm:{status} === "granted",
             buttonState:'clicked',
-        })
+            scanned:false
+            
+        });
+        console.log(status)
     }
-    handledata=async(data)=>{
+    handledata=async(data,type)=>{
         
         this.setState({
             scanned:true,
@@ -34,10 +35,10 @@ export default class Transaction extends Component{
     }
 
     render(){
-      const hasCamPerm=this.state.hasCamPerm
-        const buttonState=this.state.buttonState
-        const scannedData=this.state.scannedData
-        const scanned=this.state.scanned
+      const hasCamPerm=this.state.hasCamPerm;
+        const buttonState=this.state.buttonState;
+        const scannedData=this.state.scannedData;
+        const scanned=this.state.scanned;
         
         if(buttonState==='clicked'&& hasCamPerm){
            return(  
@@ -46,7 +47,7 @@ export default class Transaction extends Component{
 
            );
             
-        }
+        }//class no 69 
         else if(buttonState==='normal'){
              return( 
      <View style={styles.container}>
